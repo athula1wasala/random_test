@@ -4,10 +4,19 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\Product;
+use  App\Services\CommonService;
 
 class ProductController extends Controller
 {
+    private $commonService;
+
+    /**
+     * ProductController constructor.
+     * @param CommonService $commonService
+     */
+    public function __construct(CommonService $commonService) {
+        $this->commonService = $commonService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +24,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $result = Product::paginate(5);
-        return  $result;
+        return  $this->commonService->AllProduct();
     }
 
     /**
@@ -38,12 +46,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        $objProduct = new Product();
-        $objProduct->name = $request->name;
-        $objProduct->sku = $request->sku;
-        $objProduct->description = $request->description;
-        $objProduct->inventory = $request->inventory;
-        $objProduct->save();
+        return  $this->commonService->AllProduct($request);
     }
 
     /**
@@ -65,8 +68,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $objProduct = Product::find($id);
-        return  $objProduct;
+
+        return  $this->commonService->retriveProduct($id);
     }
 
     /**
@@ -78,12 +81,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $objProduct = Product::find($id);
-        $objProduct->name = $request->name;
-        $objProduct->sku = $request->sku;
-        $objProduct->description = $request->description;
-        $objProduct->inventory = $request->inventory;
-        $objProduct->save();
+
+        return  $this->commonService->updateeProduct($request,$id);
 
     }
 
@@ -95,7 +94,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $objProduct = Product::find($id);
-        $objProduct->delete();
+        return  $this->commonService->deleteProduct($id);
     }
 }
