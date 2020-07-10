@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'product'], function() {
+    Route::get("","Api\ProductController@index");
+    Route::post("/store","Api\ProductController@store");
+    Route::delete('/delete/{id}', 'Api\ProductController@destroy');
+    Route::get('/edit/{id}', 'Api\ProductController@edit');
+    Route::put("/update/{id}","Api\ProductController@update");
 });
+
