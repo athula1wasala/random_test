@@ -11,8 +11,6 @@ export default  class  Index extends Component {
         return (
             <div className="container">
                 <Header/> 
-                
-                <Footer/>
             </div>
         );
     }

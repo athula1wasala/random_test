@@ -22,10 +22,6 @@ export default  class  Header extends Component {
                     <Link className="nav-link" to="/">Home </Link>
                     </li>
                     <li className="nav-item">
-                    <Link className="nav-link" to="/about">About Us</Link>
-                  
-                    </li>
-                    <li className="nav-item">
                     <Link className="nav-link" to="/product">Product</Link>
                     </li>
 
@@ -38,7 +34,6 @@ export default  class  Header extends Component {
           </nav>
             <Switch>
             <Route exact path="/" component={Home}/>
-           <Route  exact path="/about" component={About}/>
            <Route  exact path="/product" component={Product}/>
            <Route exact path="/product/add" component={Product}></Route> 
            <Route exact path="/product/edit/:id" component={Product}></Route> 
